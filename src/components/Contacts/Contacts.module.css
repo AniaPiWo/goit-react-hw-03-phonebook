@@ -1,0 +1,30 @@
+.list {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.deleteBtn {
+  display: flex;
+  padding: 8px;
+  background-color: hotpink;
+  border: 1px solid hotpink;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 300ms;
+  color: #35363a;
+}
+
+.deleteBtn:hover {
+  background-color: #35363a;
+  border: 1px solid white;
+  color: white;
+}
