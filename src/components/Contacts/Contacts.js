@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import css from './Contacts.module.css';
 
-const Contacts = ({ contacts, contactDelete }) => (
+const Contacts = ({ contacts, onContactDelete }) => (
   <>
     <ul className={css.list}>
-      {contacts.map(e => (
-        <li className={css.item} key={e.id}>
-          {e.name}: {e.number}
+      {contacts.map(element => (
+        <li className={css.item} key={element.id}>
+          {element.name}: {element.number}
           <button
-            id={e.id}
+            id={element.id}
             className={css.deleteBtn}
             type="button"
-            onClick={contactDelete}
+            onClick={() => onContactDelete(element.id)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

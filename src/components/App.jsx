@@ -12,12 +12,12 @@ class App extends React.Component {
       { id: 'id-2', name: 'Hermione Granger', number: '443-89-12' },
       { id: 'id-3', name: 'Lord Voldemort', number: '645-17-79' },
       { id: 'id-4', name: 'Albus Dumbledor', number: '227-91-26' },
-      { id: 'id-4', name: 'Severus Snape', number: '227-91-26' },
+      { id: 'id-5', name: 'Severus Snape', number: '227-91-26' },
     ],
     filter: '',
   };
 
-  formSubmit = data => {
+  onFormSubmit = data => {
     if (this.checkName(data)) {
       alert(`${data.name} is already in contacts.`);
       return;
@@ -46,11 +46,9 @@ class App extends React.Component {
     return this.state.contacts.some(element => element.name === data.name);
   };
 
-  contactDelete = e => {
+  onContactDelete = id => {
     this.setState({
-      contacts: this.state.contacts.filter(
-        element => element.id !== e.target.id
-      ),
+      contacts: this.state.contacts.filter(element => element.id !== id),
     });
   };
 
@@ -58,12 +56,12 @@ class App extends React.Component {
     return (
       <div className="phonebookBox">
         <h1 className="title">Phonebook</h1>
-        <Form submit={this.formSubmit} />
+        <Form submit={this.onFormSubmit} />
         <Section title="Contacts">
           <Filter filter={this.state.filter} change={this.onChange} />
           <Contacts
             contacts={this.onFilter()}
-            contactDelete={this.contactDelete}
+            onContactDelete={this.onContactDelete}
           />
         </Section>
       </div>
