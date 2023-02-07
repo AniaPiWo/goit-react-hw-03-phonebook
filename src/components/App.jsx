@@ -17,7 +17,7 @@ class App extends React.Component {
     filter: '',
   };
 
-  onFormSubmit = data => {
+  handleFormSubmit = data => {
     if (this.checkName(data)) {
       alert(`${data.name} is already in contacts.`);
       return;
@@ -28,13 +28,13 @@ class App extends React.Component {
     });
   };
 
-  onChange = e => {
+  handleFormChange = e => {
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
-  onFilter = () => {
+  filtredContacts = () => {
     const normalizedFilter = this.state.filter.toLowerCase();
 
     return this.state.contacts.filter(element =>
@@ -46,7 +46,7 @@ class App extends React.Component {
     return this.state.contacts.some(element => element.name === data.name);
   };
 
-  onContactDelete = id => {
+  handleContactDelete = id => {
     this.setState({
       contacts: this.state.contacts.filter(element => element.id !== id),
     });
@@ -56,12 +56,12 @@ class App extends React.Component {
     return (
       <div className="phonebookBox">
         <h1 className="title">Phonebook</h1>
-        <Form submit={this.onFormSubmit} />
+        <Form submit={this.handleFormSubmit} />
         <Section title="Contacts">
-          <Filter filter={this.state.filter} change={this.onChange} />
+          <Filter onFilter={this.state.filter} change={this.handleFormChange} />
           <Contacts
-            contacts={this.onFilter()}
-            onContactDelete={this.onContactDelete}
+            contacts={this.filtredContacts()}
+            onContactDelete={this.handleContactDelete}
           />
         </Section>
       </div>
