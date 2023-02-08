@@ -8,11 +8,11 @@ import Filter from './Filter/Filter';
 class App extends React.Component {
   state = {
     contacts: [
-      { id: 'id-1', name: 'Harry Potter', number: '459-12-56' },
+      /*   { id: 'id-1', name: 'Harry Potter', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Granger', number: '443-89-12' },
       { id: 'id-3', name: 'Lord Voldemort', number: '645-17-79' },
       { id: 'id-4', name: 'Albus Dumbledor', number: '227-91-26' },
-      { id: 'id-5', name: 'Severus Snape', number: '227-91-26' },
+      { id: 'id-5', name: 'Severus Snape', number: '227-91-26' }, */
     ],
     filter: '',
   };
@@ -51,6 +51,27 @@ class App extends React.Component {
       contacts: this.state.contacts.filter(element => element.id !== id),
     });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      const contactsListStringified = JSON.stringify(this.state.contacts);
+      window.localStorage.setItem('contacts-list', contactsListStringified);
+    }
+    console.log(`component did update`);
+  }
+
+  componentDidMount() {
+    const list = window.localStorage.getItem('contacts-list');
+    if (!list) return;
+    console.log(`parsed`);
+    try {
+      this.setState({
+        contacts: JSON.parse(list),
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   render() {
     return (
